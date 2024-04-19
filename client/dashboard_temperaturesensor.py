@@ -7,6 +7,19 @@ import requests
 from messaging import SensorMeasurement
 import common
 
+import smarthouse.api.py
+
+
+#husk husk
+#source .venv/bin/activate
+#uvicorn smarthouse.api:app --reload
+#cd client/
+#python dashboard.py
+
+#cd ..
+
+#http://127.0.0.1:8000/docs
+
 
 def refresh_btn_cmd(temp_widget, did):
 
@@ -14,9 +27,14 @@ def refresh_btn_cmd(temp_widget, did):
 
     # TODO: START
     # send request to cloud service to obtain current temperature
+ 
+    response = get_current_sensor_measurement("4d8b1d62-7921-4917-9b70-bbd31f6e2e8e")
+    value = response.value
 
     # replace statement below with measurement from response
-    sensor_measurement = SensorMeasurement(init_value="-273.15")
+    #sensor_measurement = SensorMeasurement(init_value="-273.15")
+    
+    sensor_measurement = SensorMeasurement(init_value=value)
 
     # TODO: END
 
@@ -43,3 +61,5 @@ def init_temperature_sensor(container, did):
                                 command=lambda: refresh_btn_cmd(temp, did))
 
     refresh_button.grid(column=1, row=0, padx=20, pady=20)
+
+
