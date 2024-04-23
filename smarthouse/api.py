@@ -1,9 +1,10 @@
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, Response
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import RedirectResponse
+from fastapi.responses import RedirectResponse, JSONResponse
+from fastapi.encoders import jsonable_encoder
 from smarthouse.persistence import SmartHouseRepository
-from smarthouse.domain import SmartHouse
+from smarthouse.domain import SmartHouse, measurement
 from smarthouse.domain import Device
 from pathlib import Path
 from typing import Optional
@@ -149,16 +150,18 @@ def get_current_sensor_measurement(uuid: str):
     
 
 @app.post("/smarthouse/sensor/{uuid}/current")
-def add_measurement_for_sensor(uuid: str, measurement, unit, time):
+def add_measurement_for_sensor(uuid: str, timestamp, value, unit):
     Device = smarthouse.get_device_by_id(uuid)
     name = Device.model_name
     isSensor = Device.is_sensor()
 
     if isSensor:
-        Device.addMeasurement(time, measurement, unit)
+        Device.addMeasurement(timestamp, value, unit)
         return f"Measurement added successfully to {name}"
     else:
         return f"{name} is not a sensor!"
+
+
 
 
 @app.get("/smarthouse/sensor/{uuid}/values")
@@ -208,7 +211,8 @@ def get_current_actuator_state(uuid: str):
     isActuator = Device.is_actuator()
     if isActuator:
         state = Device.state
-        return f"{name}'s state is {state}"
+        #return f"{name}'s state is {state}"
+        return state
     else:
         return f"{name} is not an actuator"
 

@@ -15,6 +15,10 @@ def lightbulb_cmd(state, did):
 
     # TODO: START
     # send HTTP request with new actuator state to cloud service
+    uuid = did
+
+    requests.put(f"http://localhost:8000/smarthouse/device/{uuid}")
+    
 
 
     # TODO: END
