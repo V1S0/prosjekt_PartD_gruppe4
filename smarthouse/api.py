@@ -11,6 +11,10 @@ from typing import Optional
 
 
 ##husk husk##
+
+##WINDOWS
+#.venv\Scripts\activate.bat
+
 #source .venv/bin/activate
 #uvicorn smarthouse.api:app --reload
 
