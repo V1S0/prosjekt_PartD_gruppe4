@@ -31,16 +31,18 @@ class SmartHouse:
 
     def __init__(self):
 
+        #Hvert smarthus objekt vil få noen lister for dataen under
         self.floors = []
         self.rooms = []
         self.devices = []
-
+        
 
     def register_floor(self, level):#funker
         """
         This method registers a new floor at the given level in the house
         and returns the respective floor object.
         """
+        #gjeldende smarthus får lagt til et floor i floors tabellen med datatypen floor ved en gitt level
         self.floors.append(floor(level))
         return self.floors[-1] 
 
