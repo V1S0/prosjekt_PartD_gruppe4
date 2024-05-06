@@ -59,6 +59,7 @@ class SmartHouseRepository:
         devices= cursor.fetchall()
         alldevices = list(devices)
 
+        #oppretter et SMartHouse objekt
         smarthjem = SmartHouse()
 
         for f in allfloors:
@@ -75,6 +76,7 @@ class SmartHouseRepository:
         for d in alldevices:
             id = d[0]
             room = d[9]
+            #henter ut romobjektet
             for allerom in smarthjem.rooms:
                 if room == allerom.room_name:
                     room = allerom

@@ -18,6 +18,7 @@ from typing import Optional
 #source .venv/bin/activate
 #uvicorn smarthouse.api:app --reload
 
+#http://127.0.0.1:8000/docs
 
 def setup_database():
     project_dir = Path(__file__).parent.parent

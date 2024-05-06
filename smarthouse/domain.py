@@ -1,10 +1,9 @@
-from multiprocessing import Value
-from pickle import TRUE
-from sqlite3 import Timestamp
+
 from typing import Optional
 from datetime import datetime
 
-
+#klasser burde hatt stor bokstav
+#burde vært Measurement
 class measurement:
     """
     This class represents a measurement taken from a sensor.
@@ -37,7 +36,7 @@ class SmartHouse:
         self.devices = []
         
 
-    def register_floor(self, level):#funker
+    def register_floor(self, level):
         """
         This method registers a new floor at the given level in the house
         and returns the respective floor object.
@@ -78,7 +77,8 @@ class SmartHouse:
             allfloors.append(id)
         allfloors.sort()
 
-        return self.floors
+        #return self.floors
+        return allfloors
 
     def get_rooms(self):#funker
         """
@@ -89,16 +89,16 @@ class SmartHouse:
         return self.rooms
 
 
-    def get_area(self):#funker
+    def get_area(self):
         """
         This methods return the total area size of the house, i.e. the sum of the area sizes of each room in the house.
         """ 
-        allRooms = SmartHouse.get_rooms(self)
+        allRooms = self.get_rooms()
 
         allArea = []
         
-        for noe in allRooms:
-            allArea.append(noe.area)
+        for room in allRooms:
+            allArea.append(room.area)
 
 
         totalArea = sum(allArea)
@@ -109,7 +109,7 @@ class SmartHouse:
         This methods registers a given device in a given room.
         """
         for old in self.devices:
-            if old.id == device.id:
+            if old.id == device.id:         ##sjekekr om id finnes fra før, vil da bli flyttet
                 r = old.room
                 self.devices.remove(old)
                 r.devices.remove(old)
@@ -122,8 +122,8 @@ class SmartHouse:
 
 
     def get_devices(self):
-        numDevice = self.devices
-        return numDevice
+       
+        return self.devices
     
 
 
@@ -179,12 +179,13 @@ class actuator(Device):
         self.state = state
         self.value = value
         
-
+    #polymorfisme eksempel :)
     def is_sensor(self):
         return False
     def is_actuator(self):
         return True
 
+    #innkapsling eksempel
     def turn_on(self,value=None):
         print("skur nå på: "+ self.nickname)
         
@@ -234,7 +235,7 @@ class sensor(Device):
     def getHistory(self):
         return self.measurements
     def is_sensor(self):
-        return TRUE
+        return True
     def is_actuator(self):
         return False
         
