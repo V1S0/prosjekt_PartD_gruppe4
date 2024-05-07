@@ -5,6 +5,9 @@ from smarthouse_lightbulb import Actuator
 
 import common
 
+#cd client
+#python smarthouse.py
+
 log_format = "%(asctime)s: %(message)s"
 logging.basicConfig(format=log_format, level=logging.INFO, datefmt="%H:%M:%S")
 

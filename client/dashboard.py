@@ -7,6 +7,10 @@ from dashboard_temperaturesensor import init_temperature_sensor
 
 import common
 
+
+#cd client/
+#python dasboard.py
+
 log_format = "%(asctime)s: %(message)s"
 logging.basicConfig(format=log_format, level=logging.INFO, datefmt="%H:%M:%S")
 
